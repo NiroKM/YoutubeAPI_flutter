@@ -75,6 +75,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  String subscriberCount(String subcount) {
+    double finalOut = 0.0;
+    double count = double.parse(subcount);
+    if (count > 1000 && count < 1000000) {
+      finalOut = double.parse((count / 1000).toStringAsFixed(2));
+      return '$finalOut K';
+    } else if (count > 1000000) {
+      finalOut = double.parse((count / 1000000).toStringAsFixed(2));
+      return '$finalOut M';
+    } else
+      return '$subcount';
+  }
+
   _buildProfileInfo() {
     return Container(
       margin: EdgeInsets.all(20.0),
@@ -111,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${_channel.subscriberCount} subscribers',
+                  '${subscriberCount(_channel.subscriberCount)} subscribers',
                   style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 16.0,
